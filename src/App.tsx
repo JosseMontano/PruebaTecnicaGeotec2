@@ -24,7 +24,7 @@ function App() {
         />
         <Route
           path="/Mis-curiosidades"
-          element={<ShowRoute children={<MisCuriosidades />} />}
+          element={<ShowRoute children={<MisCuriosidades />} position={false} />}
         />
       </Routes>
     </Router>
