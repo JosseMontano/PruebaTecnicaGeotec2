@@ -34,14 +34,29 @@ const Index = () => {
     setCuriosidadAcutal(fact);
     setSize(!size);
   };
+  // =============== fin: Modal ===============
+
+  // =============== Inicio: Buscador ===============
+
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredItems, setFilteredItems] = useState<InfoFavCatType[]>([]); //guardar datos en para el busacdor
+  const handleSearch = (query: string) => {
+    const filtered = favs.filter((item) => {
+      const firstWord = item.fact.split(/\s+/)[0].toLowerCase();
+      console.log(firstWord)
+      return firstWord.includes(query.toLowerCase());
+    });
+    setFilteredItems(filtered);
+    setSearchQuery(query);
+  };
 
   const HorizontalScrollCarousel = () => {
     return (
       <section ref={targetRef} className="relative h-[300vh]">
         <div className="sticky top-8 flex h-screen items-center overflow-hidden">
           <motion.div style={{ x }} className="flex gap-2 card-grid-favs">
-            {!!favs.length &&
-              favs.map((item) => (
+            {!!filteredItems.length &&
+              filteredItems.map((item) => (
                 <div key={item.fact} className="w-72 h-72 card-favs">
                   <img
                     src={item.img}
@@ -65,6 +80,8 @@ const Index = () => {
             type="text"
             placeholder="Search..."
             className="px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 w-72"
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
           />
           <span className="absolute inset-y-0 right-0 pr-3 flex items-center">
             <MdSearch className="h-5 w-5 text-gray-400" />
