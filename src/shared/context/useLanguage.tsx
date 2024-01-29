@@ -1,8 +1,11 @@
 import { create } from "zustand";
+import { InicioSubtitleEn, InicioSubtitleEs } from "./valuesLanguage";
 
 interface Options {
   NavbarSubtitle1: string;
   NavbarSubtitle2: string;
+  InicioSubtitle: string;
+  InicioBtn: string;
 }
 
 interface TranslateType {
@@ -14,10 +17,14 @@ const translationsValue: TranslateType = {
   es: {
     NavbarSubtitle1: "Inicio",
     NavbarSubtitle2: "Mis curiosidades",
+    InicioSubtitle: InicioSubtitleEs,
+    InicioBtn: "Nueva curiosidad",
   },
   en: {
     NavbarSubtitle1: "Start",
     NavbarSubtitle2: "My curiosity",
+    InicioSubtitle: InicioSubtitleEn,
+    InicioBtn: "New curiosity",
   },
 };
 
