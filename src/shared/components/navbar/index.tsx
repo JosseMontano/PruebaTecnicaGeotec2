@@ -18,7 +18,7 @@ const Index = () => {
   const visible1 = changeLanguage ? "" : "invisible  ";
 
   return (
-    <nav className="bg-customSecondary p-4 absolute w-full">
+    <nav className="bg-customSecondary p-4 absolute w-full z-10">
       <div className="container mx-auto flex justify-between items-center">
         <Img imgCat={ImgCat} />
 
