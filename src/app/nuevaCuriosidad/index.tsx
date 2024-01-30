@@ -8,9 +8,15 @@ import { FaRegSave, FaRegCopy } from "react-icons/fa";
 //toast
 import toast, { Toaster } from "react-hot-toast";
 import { InfoCatType } from "../../shared/interfaces/catType";
+import { useLanguage } from "../../shared/context/useLanguage";
 
+import ContenentCard from "./components/contenentCard";
 
 const Index = () => {
+  const { words } = useLanguage();
+
+
+  // =============== fin: Traducir datos que se obtienen de la Api ===============
   // =============== inicio: obtener fondo de la card aleatoria ===============
   const background = useMemo(() => {
     return ["bg-customTertiary", "bg-customQuartenary", "bg-customSenary"];
@@ -30,7 +36,9 @@ const Index = () => {
 
   // =============== inicio: obtener datos aleatorios ===============
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-  const colorIcon = !loadingSkeleton ? "text-gray-800 cursor-pointer" : "text-gray-100"
+  const colorIcon = !loadingSkeleton
+    ? "text-gray-800 cursor-pointer"
+    : "text-gray-100";
 
   const { data } = UseFetch<InfoCatType>({
     url: "https://catfact.ninja/fact",
@@ -54,7 +62,10 @@ const Index = () => {
   // =============== inicio: copiar al portapapeles ===============
   const handleCopyText = async () => {
     await navigator.clipboard.writeText(data.fact);
-    toast.success("Copiado al portapapeles", { duration: 4000, position: "top-right" });
+    toast.success("Copiado al portapapeles", {
+      duration: 4000,
+      position: "top-right",
+    });
   };
   // =============== fin: copiar al portapapeles ===============
 
@@ -76,7 +87,10 @@ const Index = () => {
     guardados.push(newFav);
     //guardamos en el localStorage
     localStorage.setItem("favs", JSON.stringify(guardados));
-    toast.success("Guardado con exito", { duration: 4000, position: "top-right" });
+    toast.success("Guardado con exito", {
+      duration: 4000,
+      position: "top-right",
+    });
   };
   // =============== fin: guardar en el local Storage===============
 
@@ -94,11 +108,11 @@ const Index = () => {
                   src={imgUrl}
                   alt="nature image"
                 />
-                <h2 className="text-customSenary text-3xl">Curiosidad</h2>
+                <h2 className="text-customSenary text-3xl">
+                  {words.NuevaCuriosidadTitle}
+                </h2>
                 {data && (
-                  <p className="text-ellipsis overflow-hidden text-gray-800 px-5 py-2 text-center h-36 ">
-                    {data.fact}
-                  </p>
+                  <ContenentCard description={data.fact} />
                 )}
               </div>
             </div>
@@ -113,11 +127,7 @@ const Index = () => {
             onClick={handleGuardarLocalStorage}
           />
 
-          <FaRegCopy
-            size={38}
-            className={colorIcon}
-            onClick={handleCopyText}
-          />
+          <FaRegCopy size={38} className={colorIcon} onClick={handleCopyText} />
         </div>
       </div>
 

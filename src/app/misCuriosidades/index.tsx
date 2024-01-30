@@ -4,8 +4,10 @@ import { motion, useTransform, useScroll } from "framer-motion";
 import "./index.css";
 import Dialog from "../../shared/components/dialog";
 import { MdSearch } from "react-icons/md";
+import { useLanguage } from "../../shared/context/useLanguage";
 
 const Index = () => {
+  const {words} =useLanguage()
   // =============== Inicio: obtener favs del local storage ===============
   const [favs, setFavs] = useState<InfoFavCatType[]>([]);
 
@@ -43,7 +45,6 @@ const Index = () => {
   const handleSearch = (query: string) => {
     const filtered = favs.filter((item) => {
       const firstWord = item.fact.split(/\s+/)[0].toLowerCase();
-      console.log(firstWord)
       return firstWord.includes(query.toLowerCase());
     });
     setFilteredItems(filtered);

@@ -6,7 +6,6 @@ type handleGetType<T> = Promise<{
 
 export const getDataUtility = async <T>(url: string): handleGetType<T> => {
   try {
-    console.log(url);
     //obtener datos
     const response = await fetch(url, {
       method: "GET",
@@ -19,7 +18,6 @@ export const getDataUtility = async <T>(url: string): handleGetType<T> => {
     //guardar el posible error
     if (error instanceof Error) {
       const err = error.message;
-      console.log("salio");
       return { error: err, val: {} as T, status: 500 };
     }
   }
