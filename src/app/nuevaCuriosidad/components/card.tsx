@@ -5,10 +5,9 @@ import { InfoCatType } from "../../../shared/interfaces/catType";
 type CardProps = {
   data: InfoCatType;
   imgUrl: string;
-  handleLoadingTraduccion: () => void;
 };
 
-export const Card = ({ data, imgUrl, handleLoadingTraduccion }: CardProps) => {
+export const Card = ({ data, imgUrl }: CardProps) => {
   const { words } = useLanguage();
 
   return (
@@ -26,7 +25,6 @@ export const Card = ({ data, imgUrl, handleLoadingTraduccion }: CardProps) => {
           {data && (
             <DescriptionCard
               description={data.fact}
-              handleLoadingTraduccion={handleLoadingTraduccion}
             />
           )}
         </div>

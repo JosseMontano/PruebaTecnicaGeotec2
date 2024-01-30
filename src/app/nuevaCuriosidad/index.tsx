@@ -14,12 +14,6 @@ const Index = () => {
   // =============== inicio: obtener datos aleatorios ===============
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
-  const [loadingTraduccion, setLoadingTraduccion] = useState(true);
-
-  const handleLoadingTraduccion = () => {
-    setLoadingTraduccion(false);
-  };
-
   const colorIcon = !loadingSkeleton
     ? "text-gray-800 cursor-pointer"
     : "text-gray-100";
@@ -35,6 +29,7 @@ const Index = () => {
 
     setLoadingSkeleton(false);
   };
+
 
   const handleRefreshCat = async () => {
     await handleRefresh();
@@ -88,13 +83,12 @@ const Index = () => {
   return (
     <>
       <div className="h-screen grid place-content-center">
-        {loadingSkeleton && imgUrl == " " && loadingTraduccion ? (
+        {loadingSkeleton && imgUrl == " " ? (
           <SkeletonCard />
         ) : (
           <Card
             data={data}
             imgUrl={imgUrl}
-            handleLoadingTraduccion={handleLoadingTraduccion}
           />
         )}
 
