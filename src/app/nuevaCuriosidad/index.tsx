@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { InfoCatType } from "../../shared/interfaces/catType";
 import { Card } from "./components/card";
 import { FooterCard } from "./components/footerCard";
+import { handleCopiarPortaPapeles } from "../../shared/utilities/copiarPortapapeles";
 
 const Index = () => {
   // =============== inicio: obtener datos aleatorios ===============
@@ -36,7 +37,7 @@ const Index = () => {
 
   // =============== inicio: copiar al portapapeles ===============
   const handleCopyText = async () => {
-    await navigator.clipboard.writeText(data.fact);
+    await handleCopiarPortaPapeles(data.fact);
     toast.success("Copiado al portapapeles", {
       duration: 4000,
       position: "top-right",

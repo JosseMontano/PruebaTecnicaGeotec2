@@ -5,6 +5,8 @@ import Dialog from "../../shared/components/dialog";
 
 import { Search } from "./components/search";
 import { HorizontalScroll } from "./components/horizontalScroll";
+import { handleCopiarPortaPapeles } from "../../shared/utilities/copiarPortapapeles";
+
 
 const Index = () => {
   // =============== Inicio: obtener favs del local storage ===============
@@ -26,6 +28,15 @@ const Index = () => {
   const handleOpen = (fact = "") => {
     setCuriosidadAcutal(fact);
     setSize(!size);
+  };
+
+  const [copiarPortapepelesClass, setCopiarPortapepelesClass] = useState('')
+  const handleCopyText = async () => {
+    await handleCopiarPortaPapeles(curiosidadAcutal);
+    setCopiarPortapepelesClass("text-customTertiary")
+   setTimeout(() => {
+    setCopiarPortapepelesClass("")
+   }, 120);
   };
   // =============== fin: Modal ===============
 
@@ -56,9 +67,13 @@ const Index = () => {
       <Dialog
         description={curiosidadAcutal}
         handleOpen={handleOpen}
+        handleCopyText={handleCopyText}
         openModal={size}
         title={"Curiosidad"}
+        copiarPortapepelesClass={copiarPortapepelesClass}
       />
+
+
     </>
   );
 };

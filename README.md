@@ -1,29 +1,23 @@
-# Prueba técnica de Geotec
+# Prueba técnica de Geotec #2
 
-Esta aplicación realizada en React lista los usuarios de la API oficial de GitHub, así también sus datos de usuario y sus repositorios.
+Esta aplicación realizada en React muestra informacion random de gatos, dicha informacion se puede guardar en el local Storage.
 
 ## Funcionalidades
 
 <ul>
-   <li>Listar los datos de usuarios de GitHub en la página principal</li>
-   <li>Posibilidad de cambiar de página (32 usuarios por página)</li>
-   <li>Enlace para visitar el perfil de GitHub de cada usuario</li>
-   <li>Botón para ver la lista de repositorios de cada usuario</li>
-   <li>Listar datos de cualquier usuario junto con sus repositorios</li>
-   <li>Paginación de repositorios (8 por página)</li>
-   <li>Enlace para visitar cada uno de los repositorios</li>
-   <li>Cache de los datos con duración de 2 horas</li>
+   <li>Pagina principal conn informacion relacionada a la App</li>
+   <li>Obtener informacion random de los gatos de una api externa</li>
+   <li>Guardar la informacion en el local Storage</li>
+   <li>Copiar al portapapeles</li>
+   <li>Traducir la aplicacion entre el español y el ingles</li>
+   <li>Encontrar la informacion guardada mediante un buscador</li>
 </ul>
 
 ## Levantar el proyecto
 
-Clonar el repositorio, crear un archivo .env con los siguientes datos:
+1. Clonar el repositorio
 
-```env
-VITE_GITHUB_TOKEN = "" //token para la API de GitHub
-```
-
-Realizar los siguientes comandos para instalar las dependencias y levantar el servidor:
+2. Realizar los siguientes comandos para instalar las dependencias y levantar el servidor:
 
 ```console
 npm install
@@ -35,4 +29,3 @@ Comando para correr los test
 ```console
 npm run test
 ```
-
