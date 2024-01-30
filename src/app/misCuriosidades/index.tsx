@@ -8,10 +8,11 @@ import { HorizontalScroll } from "./components/horizontalScroll";
 import { handleCopiarPortaPapeles } from "../../shared/utilities/copiarPortapapeles";
 import { useLanguage } from "../../shared/context/useLanguage";
 import { UseTranslate } from "../../shared/hooks/useLanguage";
+import { NotFound } from "../../shared/components/notFound";
 
 const Index = () => {
   const { words, lenguajeActual } = useLanguage();
-  const {MehottraducirText} = UseTranslate();
+  const { MehottraducirText } = UseTranslate();
   // =============== Inicio: obtener favs del local storage ===============
   const [favs, setFavs] = useState<InfoFavCatType[]>([]);
 
@@ -29,7 +30,7 @@ const Index = () => {
   const [curiosidadAcutal, setCuriosidadAcutal] = useState("");
 
   const handleOpen = async (fact = "") => {
-    const res = await MehottraducirText(lenguajeActual, fact)
+    const res = await MehottraducirText(lenguajeActual, fact);
     setCuriosidadAcutal(res);
     setOpenModal(!openModal);
   };
@@ -61,12 +62,16 @@ const Index = () => {
     <>
       <Search handleSearch={handleSearch} searchQuery={searchQuery} />
 
-      <HorizontalScroll
-        favs={favs}
-        filteredItems={filteredItems}
-        handleOpen={handleOpen}
-        searchQuery={searchQuery}
-      />
+      {favs.length == 0 ? (
+        <NotFound />
+      ) : (
+        <HorizontalScroll
+          favs={favs}
+          filteredItems={filteredItems}
+          handleOpen={handleOpen}
+          searchQuery={searchQuery}
+        />
+      )}
 
       <Dialog
         description={curiosidadAcutal}

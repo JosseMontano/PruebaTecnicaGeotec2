@@ -11,6 +11,7 @@ interface Options {
   DialogClose: string;
   DialogTitle: string;
   DialogCopy: string;
+  NotFoundMsg:string;
 }
 
 interface TranslateType {
@@ -29,6 +30,7 @@ const translationsValue: TranslateType = {
     DialogClose: "Cerrar",
     DialogTitle: "Curiosidad",
     DialogCopy: "Copiar",
+    NotFoundMsg: "No tiene datos guardados",
   },
   en: {
     NavbarSubtitle1: "Start",
@@ -40,6 +42,7 @@ const translationsValue: TranslateType = {
     DialogClose: "Close",
     DialogTitle: "Curiosity",
     DialogCopy: "Copy",
+    NotFoundMsg: "No data saved",
   },
 };
 

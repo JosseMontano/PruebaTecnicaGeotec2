@@ -25,20 +25,23 @@ export const HorizontalScroll = ({
   // =============== fin: scroll y carousel ===============
 
   return (
-    <section ref={targetRef} className="relative h-[300vh]">
-      <div className="sticky top-8 flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-2 card-grid-favs">
-          {searchQuery.length > 0
-            ? !!filteredItems.length &&
-              filteredItems.map((item) => (
-                <Card handleOpen={handleOpen} v={item} key={item.fact} />
-              ))
-            : !!favs.length &&
-              favs.map((item) => (
-                <Card handleOpen={handleOpen} v={item} key={item.fact} />
-              ))}
-        </motion.div>
-      </div>
-    </section>
+    <>
+      <section ref={targetRef} className="relative h-[300vh]">
+        <div className="sticky top-8 flex h-screen items-center overflow-hidden">
+          <motion.div style={{ x }} className="flex gap-2 card-grid-favs">
+            {searchQuery.length > 0
+              ? !!filteredItems.length &&
+                filteredItems.map((item) => (
+                  <Card handleOpen={handleOpen} v={item} key={item.fact} />
+                ))
+              : !!favs.length &&
+                favs.map((item) => (
+                  <Card handleOpen={handleOpen} v={item} key={item.fact} />
+                ))}
+          </motion.div>
+        </div>
+      </section>
+
+    </>
   );
 };
