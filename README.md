@@ -1,7 +1,7 @@
 # Prueba técnica de Geotec #2
 
 Esta aplicación realizada en React muestra informacion random de gatos, dicha informacion se puede guardar en el local Storage, Si no quiere descargar el codigo fuente puede probarlo en:
-<a href="https://pruebatecnicageotec.web.app/#/" targe="_blank"> Prueba Geotec </a>
+<a href="https://pruebatecnicageotec.web.app/#/" target="_blank"> Prueba Geotec </a>
 
 ## Funcionalidades
 
