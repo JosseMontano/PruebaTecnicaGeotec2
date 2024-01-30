@@ -30,7 +30,6 @@ const Index = () => {
     setLoadingSkeleton(false);
   };
 
-
   const handleRefreshCat = async () => {
     await handleRefresh();
   };
@@ -86,10 +85,7 @@ const Index = () => {
         {loadingSkeleton && imgUrl == " " ? (
           <SkeletonCard />
         ) : (
-          <Card
-            data={data}
-            imgUrl={imgUrl}
-          />
+          <Card data={data} imgUrl={imgUrl} />
         )}
 
         <FooterCard
