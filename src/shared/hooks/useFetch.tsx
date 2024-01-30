@@ -23,7 +23,6 @@ const UseFetch = <DataType,>({ url }: Params) => {
     setError(error);
     setStatus(status);
     setLoading(false);
-    console.log("obtuvo nuevo dato");
   };
 
   useEffect(() => {

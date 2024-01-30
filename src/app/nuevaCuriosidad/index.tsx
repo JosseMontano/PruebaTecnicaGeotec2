@@ -36,18 +36,17 @@ const Index = () => {
     setLoadingSkeleton(false);
   };
 
-  const [refreshInfoCat, setRefreshInfoCat] = useState(0);
-  const handleRefreshCat = async() => {
+  const handleRefreshCat = async () => {
     await handleRefresh();
-    setRefreshInfoCat(refreshInfoCat + 1);
   };
+
   useEffect(() => {
     setLoadingSkeleton(true);
     if (data.fact) {
       const firstWord = data.fact?.split(" ");
       handleGuardarPrevImage("https://cataas.com/cat/says/" + firstWord[0]);
     }
-  }, [data, refreshInfoCat]);
+  }, [data]);
   // =============== fin: obtener datos aleatorios ===============
 
   // =============== inicio: copiar al portapapeles ===============
