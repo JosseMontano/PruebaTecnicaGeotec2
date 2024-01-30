@@ -2,14 +2,13 @@ import { useLanguage } from "../../../shared/context/useLanguage";
 import DescriptionCard from "./descriptionCard";
 import { InfoCatType } from "../../../shared/interfaces/catType";
 
-
-
 type CardProps = {
   data: InfoCatType;
   imgUrl: string;
+  handleLoadingTraduccion: () => void;
 };
 
-export const Card = ({ data, imgUrl }: CardProps) => {
+export const Card = ({ data, imgUrl, handleLoadingTraduccion }: CardProps) => {
   const { words } = useLanguage();
 
   return (
@@ -24,7 +23,12 @@ export const Card = ({ data, imgUrl }: CardProps) => {
           <h2 className="text-customSenary text-3xl">
             {words.NuevaCuriosidadTitle}
           </h2>
-          {data && <DescriptionCard description={data.fact} />}
+          {data && (
+            <DescriptionCard
+              description={data.fact}
+              handleLoadingTraduccion={handleLoadingTraduccion}
+            />
+          )}
         </div>
       </div>
     </div>
