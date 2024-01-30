@@ -1,13 +1,16 @@
 import { create } from "zustand";
 import { InicioSubtitleEn, InicioSubtitleEs } from "./valuesLanguage";
 
-
 interface Options {
   NavbarSubtitle1: string;
   NavbarSubtitle2: string;
   InicioSubtitle: string;
   InicioBtn: string;
   NuevaCuriosidadTitle: string;
+  MisCuriosidadesInput: string;
+  DialogClose: string;
+  DialogTitle: string;
+  DialogCopy: string;
 }
 
 interface TranslateType {
@@ -22,6 +25,10 @@ const translationsValue: TranslateType = {
     InicioSubtitle: InicioSubtitleEs,
     InicioBtn: "Nueva curiosidad",
     NuevaCuriosidadTitle: "Curiosidad",
+    MisCuriosidadesInput: "Buscar...",
+    DialogClose: "Cerrar",
+    DialogTitle: "Curiosidad",
+    DialogCopy: "Copiar",
   },
   en: {
     NavbarSubtitle1: "Start",
@@ -29,6 +36,10 @@ const translationsValue: TranslateType = {
     InicioSubtitle: InicioSubtitleEn,
     InicioBtn: "New curiosity",
     NuevaCuriosidadTitle: "Curiosity",
+    MisCuriosidadesInput: "Search...",
+    DialogClose: "Close",
+    DialogTitle: "Curiosity",
+    DialogCopy: "Copy",
   },
 };
 

@@ -6,9 +6,12 @@ import Dialog from "../../shared/components/dialog";
 import { Search } from "./components/search";
 import { HorizontalScroll } from "./components/horizontalScroll";
 import { handleCopiarPortaPapeles } from "../../shared/utilities/copiarPortapapeles";
-
+import { useLanguage } from "../../shared/context/useLanguage";
+import { UseTranslate } from "../../shared/hooks/useLanguage";
 
 const Index = () => {
+  const { words, lenguajeActual } = useLanguage();
+  const {MehottraducirText} = UseTranslate();
   // =============== Inicio: obtener favs del local storage ===============
   const [favs, setFavs] = useState<InfoFavCatType[]>([]);
 
@@ -22,21 +25,22 @@ const Index = () => {
   // =============== fin: obtener favs del local storage ===============
 
   // =============== Inicio: Modal ===============
-  const [size, setSize] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [curiosidadAcutal, setCuriosidadAcutal] = useState("");
 
-  const handleOpen = (fact = "") => {
-    setCuriosidadAcutal(fact);
-    setSize(!size);
+  const handleOpen = async (fact = "") => {
+    const res = await MehottraducirText(lenguajeActual, fact)
+    setCuriosidadAcutal(res);
+    setOpenModal(!openModal);
   };
 
-  const [copiarPortapepelesClass, setCopiarPortapepelesClass] = useState('')
+  const [copiarPortapepelesClass, setCopiarPortapepelesClass] = useState("");
   const handleCopyText = async () => {
     await handleCopiarPortaPapeles(curiosidadAcutal);
-    setCopiarPortapepelesClass("text-customTertiary")
-   setTimeout(() => {
-    setCopiarPortapepelesClass("")
-   }, 120);
+    setCopiarPortapepelesClass("text-customTertiary");
+    setTimeout(() => {
+      setCopiarPortapepelesClass("");
+    }, 120);
   };
   // =============== fin: Modal ===============
 
@@ -68,12 +72,10 @@ const Index = () => {
         description={curiosidadAcutal}
         handleOpen={handleOpen}
         handleCopyText={handleCopyText}
-        openModal={size}
-        title={"Curiosidad"}
+        openModal={openModal}
+        title={words.DialogTitle}
         copiarPortapepelesClass={copiarPortapepelesClass}
       />
-
-
     </>
   );
 };

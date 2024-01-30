@@ -4,6 +4,7 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import { useLanguage } from "../../context/useLanguage";
 
 interface Params {
   //functions
@@ -24,6 +25,7 @@ const Dialog = ({
   handleCopyText,
   copiarPortapepelesClass
 }: Params) => {
+  const {words} = useLanguage()
   return (
     <DialogComponent
       open={openModal}
@@ -36,11 +38,11 @@ const Dialog = ({
       <DialogBody placeholder={""}>{description}</DialogBody>
       <DialogFooter placeholder={""}>
         <button onClick={() => handleCopyText()} className={`mr-1 ${copiarPortapepelesClass}`}>
-          <span>Copiar</span>
+          <span>{words.DialogCopy}</span>
         </button>
 
         <button onClick={() => handleOpen()} className="mr-1">
-          <span>Cerrar</span>
+          <span>{words.DialogClose}</span>
         </button>
       </DialogFooter>
     </DialogComponent>
