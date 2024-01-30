@@ -22,7 +22,7 @@ const DescriptionCard = ({ description, handleLoadingTraduccion }: Params) => {
 
   useEffect(() => {
     handleTranlateText();
-  }, [lenguajeActual]);
+  }, [lenguajeActual, description]);
   return (
     <p className="text-ellipsis overflow-hidden text-gray-800 px-5 py-2 text-center h-36 ">
       {curiosidadGato}

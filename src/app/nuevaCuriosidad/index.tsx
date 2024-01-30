@@ -24,7 +24,7 @@ const Index = () => {
     ? "text-gray-800 cursor-pointer"
     : "text-gray-100";
 
-  const { data } = UseFetch<InfoCatType>({
+  const { data, handleRefresh } = UseFetch<InfoCatType>({
     url: "https://catfact.ninja/fact",
   });
   const [imgUrl, setImgUrl] = useState(" ");
@@ -36,13 +36,18 @@ const Index = () => {
     setLoadingSkeleton(false);
   };
 
+  const [refreshInfoCat, setRefreshInfoCat] = useState(0);
+  const handleRefreshCat = async() => {
+    await handleRefresh();
+    setRefreshInfoCat(refreshInfoCat + 1);
+  };
   useEffect(() => {
+    setLoadingSkeleton(true);
     if (data.fact) {
-      setLoadingSkeleton(true);
       const firstWord = data.fact?.split(" ");
       handleGuardarPrevImage("https://cataas.com/cat/says/" + firstWord[0]);
     }
-  }, [data]);
+  }, [data, refreshInfoCat]);
   // =============== fin: obtener datos aleatorios ===============
 
   // =============== inicio: copiar al portapapeles ===============
@@ -98,6 +103,7 @@ const Index = () => {
           colorIcon={colorIcon}
           handleCopyText={handleCopyText}
           handleGuardarLocalStorage={handleGuardarLocalStorage}
+          handleLoadOtheCat={handleRefreshCat}
         />
       </div>
       {/* =============== Inicio: mostrar toast =============== */}

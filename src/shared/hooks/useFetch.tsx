@@ -12,16 +12,21 @@ const UseFetch = <DataType,>({ url }: Params) => {
   const [error, setError] = useState("");
   const [status, setStatus] = useState(0);
 
-  useEffect(() => {
-    const handleGetData = async () => {
-      setLoading(true);
-      const { val, error, status } = await getDataUtility<DataType>(url);
-      setdata(val);
-      setError(error);
-      setStatus(status);
-      setLoading(false);
-    };
+  const handleRefresh = async () => {
+    await handleGetData();
+  };
 
+  const handleGetData = async () => {
+    setLoading(true);
+    const { val, error, status } = await getDataUtility<DataType>(url);
+    setdata(val);
+    setError(error);
+    setStatus(status);
+    setLoading(false);
+    console.log("obtuvo nuevo dato");
+  };
+
+  useEffect(() => {
     handleGetData();
   }, [url]);
 
@@ -29,7 +34,15 @@ const UseFetch = <DataType,>({ url }: Params) => {
     if (loading) return <Spinner className="h-16 w-16 text-gray-900/50" />;
   };
 
-  return { data, error, status, loading, handleLoading };
+  return {
+    data,
+    error,
+    status,
+    loading,
+    handleLoading,
+    handleGetData,
+    handleRefresh,
+  };
 };
 
 export default UseFetch;
