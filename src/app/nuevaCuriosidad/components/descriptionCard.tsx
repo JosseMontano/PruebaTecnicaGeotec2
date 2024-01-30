@@ -5,7 +5,7 @@ import { getDataUtility } from "../../../shared/utilities/getData";
 interface Params {
   description: string;
 }
-const ContenentCard = ({ description }: Params) => {
+const DescriptionCard = ({ description }: Params) => {
   // =============== inicio: Traducir datos que se obtienen de la Api ===============
   const { lenguajeActual } = useLanguage();
 
@@ -30,4 +30,4 @@ const ContenentCard = ({ description }: Params) => {
   );
 };
 
-export default ContenentCard;
+export default DescriptionCard;

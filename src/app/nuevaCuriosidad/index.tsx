@@ -1,39 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import UseFetch from "../../shared/hooks/useFetch";
 import SkeletonCard from "./components/skeletonCard";
-
-//icons
-import { FaRegSave, FaRegCopy } from "react-icons/fa";
 
 //toast
 import toast, { Toaster } from "react-hot-toast";
 import { InfoCatType } from "../../shared/interfaces/catType";
-import { useLanguage } from "../../shared/context/useLanguage";
-
-import ContenentCard from "./components/contenentCard";
+import { Card } from "./components/card";
+import { FooterCard } from "./components/footerCard";
 
 const Index = () => {
-  const { words } = useLanguage();
-
-
-  // =============== fin: Traducir datos que se obtienen de la Api ===============
-  // =============== inicio: obtener fondo de la card aleatoria ===============
-  const background = useMemo(() => {
-    return ["bg-customTertiary", "bg-customQuartenary", "bg-customSenary"];
-  }, []);
-
-  const [classBackground, setClassBackground] = useState(background[0]);
-
-  useEffect(() => {
-    const handleRandom = () => {
-      const randomNumber = Math.floor(Math.random() * 3);
-      const res = background[randomNumber];
-      setClassBackground(res);
-    };
-    handleRandom();
-  }, [background]);
-  // =============== fin: obtener fondo de la card aleatoria ===============
-
   // =============== inicio: obtener datos aleatorios ===============
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const colorIcon = !loadingSkeleton
@@ -100,38 +75,18 @@ const Index = () => {
         {loadingSkeleton && imgUrl ? (
           <SkeletonCard />
         ) : (
-          <div className="h-96 w-72 bg-customSecondary border-2 border-gray-200 rounded-md  ">
-            <div className={`h-1/4 ${classBackground}`}>
-              <div className="relative top-12 flex flex-col items-center ">
-                <img
-                  className="h-24 w-24 rounded-full object-cover object-center"
-                  src={imgUrl}
-                  alt="nature image"
-                />
-                <h2 className="text-customSenary text-3xl">
-                  {words.NuevaCuriosidadTitle}
-                </h2>
-                {data && (
-                  <ContenentCard description={data.fact} />
-                )}
-              </div>
-            </div>
-          </div>
+          <Card data={data} imgUrl={imgUrl} />
         )}
 
-        <div className="relative bottom-10 rounded-md flex justify-evenly gap-3 border-t-2 border-gray-800">
-          <div className="absolute left-1/2 border-r-2 border-gray-800 h-full"></div>
-          <FaRegSave
-            size={38}
-            className={colorIcon}
-            onClick={handleGuardarLocalStorage}
-          />
-
-          <FaRegCopy size={38} className={colorIcon} onClick={handleCopyText} />
-        </div>
+        <FooterCard
+          colorIcon={colorIcon}
+          handleCopyText={handleCopyText}
+          handleGuardarLocalStorage={handleGuardarLocalStorage}
+        />
       </div>
-
+      {/* =============== Inicio: mostrar toast =============== */}
       <Toaster />
+      {/* =============== fin: mostrar toast =============== */}
     </>
   );
 };
