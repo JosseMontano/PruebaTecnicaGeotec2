@@ -19,7 +19,6 @@ const ContenentCard = ({ description }: Params) => {
     const palabraTraducida = val.responseData.translatedText;
 
     setCuriosidadGato(palabraTraducida); */
-    setCuriosidadGato("");
   };
   useEffect(() => {
     handleTranlateText();

@@ -1,13 +1,12 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { InfoFavCatType } from "../../shared/interfaces/catFav";
-import { motion, useTransform, useScroll } from "framer-motion";
 import "./index.css";
 import Dialog from "../../shared/components/dialog";
-import { MdSearch } from "react-icons/md";
-import { useLanguage } from "../../shared/context/useLanguage";
+
+import { Search } from "./components/search";
+import { HorizontalScroll } from "./components/horizontalScroll";
 
 const Index = () => {
-  const {words} =useLanguage()
   // =============== Inicio: obtener favs del local storage ===============
   const [favs, setFavs] = useState<InfoFavCatType[]>([]);
 
@@ -19,14 +18,6 @@ const Index = () => {
     }
   }, []);
   // =============== fin: obtener favs del local storage ===============
-
-  // =============== Inicio: scroll y carousel ===============
-  const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
-  // =============== fin: scroll y carousel ===============
 
   // =============== Inicio: Modal ===============
   const [size, setSize] = useState(false);
@@ -41,7 +32,7 @@ const Index = () => {
   // =============== Inicio: Buscador ===============
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filteredItems, setFilteredItems] = useState<InfoFavCatType[]>([]); //guardar datos en para el busacdor
+  const [filteredItems, setFilteredItems] = useState<InfoFavCatType[]>([]); //guardar datos para el busacdor
   const handleSearch = (query: string) => {
     const filtered = favs.filter((item) => {
       const firstWord = item.fact.split(/\s+/)[0].toLowerCase();
@@ -51,46 +42,16 @@ const Index = () => {
     setSearchQuery(query);
   };
 
-  const HorizontalScrollCarousel = () => {
-    return (
-      <section ref={targetRef} className="relative h-[300vh]">
-        <div className="sticky top-8 flex h-screen items-center overflow-hidden">
-          <motion.div style={{ x }} className="flex gap-2 card-grid-favs">
-            {!!filteredItems.length &&
-              filteredItems.map((item) => (
-                <div key={item.fact} className="w-72 h-72 card-favs">
-                  <img
-                    src={item.img}
-                    alt="gato"
-                    className="w-72 h-72 object-cover cursor-pointer"
-                    onClick={() => handleOpen(item.fact)}
-                  />
-                </div>
-              ))}
-          </motion.div>
-        </div>
-      </section>
-    );
-  };
-
   return (
     <>
-      <div className="sticky top-1/4 flex justify-center z-10">
-        <div className="relative flex items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 w-72"
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-          <span className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            <MdSearch className="h-5 w-5 text-gray-400" />
-          </span>
-        </div>
-      </div>
+      <Search handleSearch={handleSearch} searchQuery={searchQuery} />
 
-      {HorizontalScrollCarousel()}
+      <HorizontalScroll
+        favs={favs}
+        filteredItems={filteredItems}
+        handleOpen={handleOpen}
+        searchQuery={searchQuery}
+      />
 
       <Dialog
         description={curiosidadAcutal}
