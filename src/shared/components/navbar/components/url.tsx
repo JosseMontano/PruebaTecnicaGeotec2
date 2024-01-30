@@ -10,6 +10,7 @@ const Url = ({ handleRedirect, url, text }: Params) => {
     <a
       onClick={() => handleRedirect(url)}
       className="text-whit cursor-pointer uppercase font-semibold text-customPrimary  rounded-md p-1 hover:bg-customPrimary hover:text-customSecondary"
+      role="url"
     >
       {text}
     </a>

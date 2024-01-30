@@ -13,6 +13,10 @@ Esta aplicación realizada en React muestra informacion random de gatos, dicha i
    <li>Encontrar la informacion guardada mediante un buscador</li>
 </ul>
 
+## Versiones del proyecto
+1. Node: 18.14.0
+2. React: 18.2.0
+
 ## Levantar el proyecto
 
 1. Clonar el repositorio

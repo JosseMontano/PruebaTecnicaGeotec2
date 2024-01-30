@@ -10,6 +10,7 @@ const Img = ({ imgCat }: Params) => {
           src={imgCat}
           alt="gatitos"
           className="h-12 w-14 rounded-full object-cover"
+          role="Imagen-nav"
         />
       </div>
     </div>
