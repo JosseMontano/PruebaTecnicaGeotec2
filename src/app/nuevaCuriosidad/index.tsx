@@ -8,6 +8,7 @@ import { InfoCatType } from "../../shared/interfaces/catType";
 import { Card } from "./components/card";
 import { FooterCard } from "./components/footerCard";
 import { handleCopiarPortaPapeles } from "../../shared/utilities/copiarPortapapeles";
+import { getBase64Image } from "../../shared/utilities/getBase64Imagen";
 
 const Index = () => {
   // =============== inicio: obtener datos aleatorios ===============
@@ -19,18 +20,20 @@ const Index = () => {
   const { data } = UseFetch<InfoCatType>({
     url: "https://catfact.ninja/fact",
   });
-  const [imgUrl, setImgUrl] = useState("https://cataas.com/cat/says/");
+  const [imgUrl, setImgUrl] = useState(" ");
+
+  const handleGuardarPrevImage = async (url: string) => {
+    const base64 = await getBase64Image(url);
+    setImgUrl(base64 as string);
+
+    setLoadingSkeleton(false);
+  };
 
   useEffect(() => {
     if (data.fact) {
       setLoadingSkeleton(true);
       const firstWord = data.fact?.split(" ");
-      setImgUrl(imgUrl + firstWord[0]);
-
-      //setLoadingSkeleton(false);
-      setTimeout(() => {
-        setLoadingSkeleton(false);
-      }, 1500);
+      handleGuardarPrevImage("https://cataas.com/cat/says/" + firstWord[0]);
     }
   }, [data]);
   // =============== fin: obtener datos aleatorios ===============
@@ -46,12 +49,13 @@ const Index = () => {
   // =============== fin: copiar al portapapeles ===============
 
   // =============== inicio: guardar en el local Storage===============
-  const handleGuardarLocalStorage = () => {
-    //preparamos el nuevo dato
+
+  const handleGuardarLocalStorage = async () => {
     const newFav = {
       img: imgUrl,
       fact: data.fact,
     };
+
     //vector auxiliar para agregar el nuevo dato
     let guardados = [];
     //obtenemos el valor del localStorage
@@ -73,7 +77,7 @@ const Index = () => {
   return (
     <>
       <div className="h-screen grid place-content-center">
-        {loadingSkeleton && imgUrl ? (
+        {loadingSkeleton && imgUrl == " " ? (
           <SkeletonCard />
         ) : (
           <Card data={data} imgUrl={imgUrl} />

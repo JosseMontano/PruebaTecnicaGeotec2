@@ -2,6 +2,8 @@ import { useLanguage } from "../../../shared/context/useLanguage";
 import DescriptionCard from "./descriptionCard";
 import { InfoCatType } from "../../../shared/interfaces/catType";
 
+
+
 type CardProps = {
   data: InfoCatType;
   imgUrl: string;
